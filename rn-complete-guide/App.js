@@ -1,36 +1,23 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
+import GoalItem from './components/GoalItem';
+import GoalInput from './components/GoalInput';
 
 const App = () => {
-  const [enteredGoal, setEnteredGoal] = useState('');
   const [courseGoals, setCourseGoals] = useState([]);
 
-  const handleChangeEnteredGoal = (enteredText) => {
-    setEnteredGoal(enteredText);
-  }
-
-  const handleAddGoal = () => {
-    setEnteredGoal('');
-    setCourseGoals(courseGoals => [...courseGoals, { key: Math.random().toString(), value: enteredGoal }]);
+  const handleAddGoal = goal => {
+    //setEnteredGoal('');
+    setCourseGoals(courseGoals => [...courseGoals, { key: Math.random().toString(), value: goal }]);
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.addGoalView}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Course goal"
-          onChangeText={handleChangeEnteredGoal}
-          value={enteredGoal} />
-        <Button title="Add" onPress={handleAddGoal} />
-      </View>
+      <GoalInput handleAddGoal={handleAddGoal} />
       <FlatList
-        style={styles.goalsScrollView}
+        style={styles.goalsFlatView}
         data={courseGoals}
-        renderItem={courseGoal => (
-          <View key={courseGoal} style={styles.goalItem}>
-            <Text>{courseGoal.item.value}</Text>
-          </View>)}>
+        renderItem={courseGoal => <GoalItem goal={courseGoal} />}>
       </FlatList>
     </View>
   );
@@ -44,28 +31,7 @@ const styles = StyleSheet.create({
     paddingRight: 40,
     flex: 1
   },
-  addGoalView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 30
-  },
-  textInput: {
-    width: '80%',
-    borderBottomColor: '#ffe7bd',
-    borderBottomWidth: 1,
-    padding: 10
-  },
-  goalItem: {
-    padding: 10,
-    marginBottom: 5,
-    backgroundColor: '#ffe7bd',
-    borderRadius: 10,
-    height: 80,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  goalsScrollView: {
+  goalsFlatView: {
     flex: 1
   }
 });
