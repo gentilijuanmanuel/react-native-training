@@ -1,2 +1,2 @@
-# react-native-training
+# React Native training
 Stuff to learn React Native.
