@@ -7,17 +7,20 @@ const App = () => {
   const [courseGoals, setCourseGoals] = useState([]);
 
   const handleAddGoal = goal => {
-    //setEnteredGoal('');
     setCourseGoals(courseGoals => [...courseGoals, { key: Math.random().toString(), value: goal }]);
+  }
+
+  const handleOnDeleteGoal = goalKey => {
+    setCourseGoals(courseGoals => [...courseGoals.filter(courseGoal => courseGoal.key != goalKey)]);
   }
 
   return (
     <View style={styles.container}>
-      <GoalInput handleAddGoal={handleAddGoal} />
+      <GoalInput onAddGoal={handleAddGoal} />
       <FlatList
         style={styles.goalsFlatView}
         data={courseGoals}
-        renderItem={courseGoal => <GoalItem goal={courseGoal} />}>
+        renderItem={courseGoal => <GoalItem goal={courseGoal} onDelete={handleOnDeleteGoal} />}>
       </FlatList>
     </View>
   );
