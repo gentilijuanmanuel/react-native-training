@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const GoalItem = props => {
+const GoalItem = (props) => {
   const { goal, onDelete } = props;
 
   return (
