@@ -6,7 +6,7 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard, // Note: this is not a component, it's an API to interact with the native keyboard
-  Alert
+  Alert // Note: this is not a component, it's an API to interact with the native keyboard
 } from 'react-native';
 
 import Card from '../components/Card';
@@ -14,6 +14,8 @@ import Input from '../components/Input';
 import colors from '../constants/colors';
 
 const StartGameScreen = (props) => {
+  const { navigation } = props;
+
   const [enteredValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState();
@@ -51,7 +53,7 @@ const StartGameScreen = (props) => {
         <Button
           title="Let's go!"
           color={colors.primary}
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Game')}
         />
       </Card>
     );
