@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native';
+
+import Card from '../components/Card';
+import colors from '../constants/colors';
 
 const LIMITS = {
   MIN_LIMIT: 0,
@@ -61,45 +64,73 @@ const GameScreen = (props) => {
     Alert.alert('Game finished!', 'Your cell phone is more intelligent than you :)', [{ text: 'haha thanks!', style: 'default', onPress: () => {} }]);
   };
 
-  let display = null;
-  if (numbers.counter === 5) {
-    display = <Text>You won, fucking human.</Text>;
-  } else {
-    display = (
-      <View>
-        <Text>{numbers.guessedNumber}</Text>
-        <Button
-          style={styles.lowerButton}
-          title="Lower"
-          onPress={lowerEstimationHandler}
-        />
-        <Button
-          style={styles.greaterButton}
-          title="Greater"
-          onPress={greaterEstimationHandler}
-        />
-        <Button
-          style={styles.numberMatchedButton}
-          title="This is the number!"
-          onPress={numberMatchedHandler}
-        />
-      </View>
-    );
-  }
-
-  return display;
+  return (
+    <View style={styles.container}>
+      <Card style={styles.cardContainer}>
+        <Text style={styles.guessedNumberText}>{numbers.counter >= 5 ? 'You won, fucking human.' : numbers.guessedNumber}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.greaterLowerButton} onPress={lowerEstimationHandler}>
+            <Text style={styles.greaterLowerText}>-</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.greaterLowerButton} onPress={greaterEstimationHandler}>
+            <Text style={styles.greaterLowerText}>+</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={styles.numberMatchedButton} onPress={numberMatchedHandler}>
+          <Text style={styles.numberMatchedText}>This is the number!</Text>
+        </TouchableOpacity>
+      </Card>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-  lowerButton: {
-
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  greaterButton: {
-
+  cardContainer: {
+    alignItems: 'center',
+    width: 300,
+    maxWidth: '80%'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%'
+  },
+  guessedNumberText: {
+    fontSize: 70,
+    fontStyle: 'italic'
+  },
+  greaterLowerButton: {
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+    backgroundColor: colors.primary,
+    padding: 10,
+    borderRadius: 20
+  },
+  greaterLowerText: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    fontSize: 20
   },
   numberMatchedButton: {
-
+    marginTop: 20,
+    alignItems: 'center',
+    backgroundColor: colors.primary,
+    padding: 10,
+    borderRadius: 20
   },
+  numberMatchedText: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    fontSize: 15
+  }
 });
 
 export default GameScreen;

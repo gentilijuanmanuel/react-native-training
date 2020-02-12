@@ -13,16 +13,12 @@ import Card from '../components/Card';
 import Input from '../components/Input';
 import colors from '../constants/colors';
 
-const StartGameScreen = (props) => {
-  const { navigation } = props;
-
+const StartGameScreen = ({ navigation }) => {
   const [enteredValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState();
 
-  const changedTextHandler = (inputText) => {
-    setEnteredValue(inputText.replace(/[^0-9]/, ''));
-  };
+  const changedTextHandler = (inputText) => setEnteredValue(inputText.replace(/[^0-9]/, ''));
 
   const resetNumberHandler = () => {
     setConfirmed(false);
@@ -43,21 +39,17 @@ const StartGameScreen = (props) => {
     Keyboard.dismiss();
   };
 
-  let confirmedNumberOutput;
-
-  if (confirmed) {
-    confirmedNumberOutput = (
-      <Card style={styles.chosenNumberContainer}>
-        <Text>You selected</Text>
-        <Text style={styles.selectedNumberText}>{selectedNumber}</Text>
-        <Button
-          title="Let's go!"
-          color={colors.primary}
-          onPress={() => navigation.navigate('Game')}
-        />
-      </Card>
-    );
-  }
+  const renderConfirmedNumberOutput = () => (
+    <Card style={styles.chosenNumberContainer}>
+      <Text>You selected</Text>
+      <Text style={styles.selectedNumberText}>{selectedNumber}</Text>
+      <Button
+        title="Let's go!"
+        color={colors.primary}
+        onPress={() => navigation.navigate('Game')}
+      />
+    </Card>
+  );
 
   return (
     <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
@@ -75,23 +67,21 @@ const StartGameScreen = (props) => {
             value={enteredValue}
           />
           <View style={styles.buttonsContainer}>
-            <View styles={styles.button}>
-              <Button
-                title="Reset"
-                color={colors.accent}
-                onPress={resetNumberHandler}
-              />
-            </View>
-            <View styles={styles.button}>
-              <Button
-                title="Start"
-                color={colors.primary}
-                onPress={confirmNumberHandler}
-              />
-            </View>
+            <Button
+              title="Reset"
+              styles={styles.button}
+              color={colors.accent}
+              onPress={resetNumberHandler}
+            />
+            <Button
+              title="Start"
+              styles={styles.button}
+              color={colors.primary}
+              onPress={confirmNumberHandler}
+            />
           </View>
         </Card>
-        {confirmedNumberOutput}
+        {confirmed && renderConfirmedNumberOutput()}
       </View>
     </TouchableWithoutFeedback>
   );
