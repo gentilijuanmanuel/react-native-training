@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity
 } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import Card from '../components/Card';
 import colors from '../constants/colors';
@@ -70,10 +71,10 @@ const GameScreen = (props) => {
         <Text style={styles.guessedNumberText}>{numbers.counter >= 5 ? 'You won, fucking human.' : numbers.guessedNumber}</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.greaterLowerButton} onPress={lowerEstimationHandler}>
-            <Text style={styles.greaterLowerText}>-</Text>
+            <AntDesign name="minus" size={20} color="white" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.greaterLowerButton} onPress={greaterEstimationHandler}>
-            <Text style={styles.greaterLowerText}>+</Text>
+            <AntDesign name="plus" size={20} color="white" />
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.numberMatchedButton} onPress={numberMatchedHandler}>
@@ -111,12 +112,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 20
-  },
-  greaterLowerText: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-    fontSize: 20
   },
   numberMatchedButton: {
     marginTop: 20,
