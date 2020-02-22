@@ -46,7 +46,7 @@ const StartGameScreen = ({ navigation }) => {
       <Button
         title="Let's go!"
         color={colors.primary}
-        onPress={() => navigation.navigate('Game')}
+        onPress={() => navigation.navigate('Game', { selectedNumber })}
       />
     </Card>
   );

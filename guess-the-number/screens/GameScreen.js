@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -13,73 +13,82 @@ import Card from '../components/Card';
 import colors from '../constants/colors';
 
 const LIMITS = {
-  MIN_LIMIT: 0,
-  MAX_LIMIT: 99
+  MIN_LIMIT: 1,
+  MAX_LIMIT: 100
 };
 
-const generateRandomNumber = (currentLowerLimit, currentUpperLimit) => parseInt((Math.random() * currentUpperLimit) + currentLowerLimit);
+const USER_ACTIONS = {
+  LOWER: 'lower',
+  GREATER: 'greater'
+};
+
+const generateRandomNumber = (currentLowerLimit, currentUpperLimit, excludedNumber) => {
+  currentLowerLimit = Math.ceil(currentLowerLimit);
+  currentUpperLimit = Math.floor(currentUpperLimit);
+  const randomNumber = Math.floor(Math.random() * (currentUpperLimit - currentLowerLimit) + currentLowerLimit);
+  if (randomNumber === excludedNumber) {
+    return generateRandomNumber(currentLowerLimit, currentUpperLimit, excludedNumber);
+  }
+  return randomNumber;
+};
 
 const GameScreen = (props) => {
-  const [numbers, setNumbers] = useState({
-    lowerLimit: LIMITS.MIN_LIMIT,
-    upperLimit: LIMITS.MAX_LIMIT,
-    guessedNumber: generateRandomNumber(LIMITS.MIN_LIMIT, LIMITS.MAX_LIMIT),
-    counter: 0
-  });
+  const { route } = props;
+  const { selectedNumber } = route.params;
 
-  const lowerEstimationHandler = () => {
-    if (numbers.guessedNumber < LIMITS.MAX_LIMIT) {
-      setNumbers((prevState) => ({
-        ...prevState,
-        upperLimit: prevState.guessedNumber,
-        guessedNumber: generateRandomNumber(prevState.lowerLimit, prevState.guessedNumber),
-        counter: prevState.counter + 1
-      }));
-    } else {
-      setNumbers((prevState) => ({
-        ...prevState,
-        guessedNumber: generateRandomNumber(prevState.lowerLimit, prevState.upperLimit),
-        counter: prevState.counter + 1
-      }));
+  const [guessedNumber, setGuessedNumber] = useState(generateRandomNumber(LIMITS.MIN_LIMIT, LIMITS.MAX_LIMIT, selectedNumber));
+  const [gameFinished, setGameFinished] = useState(guessedNumber === selectedNumber);
+  const [counter, setCounter] = useState(0);
+
+  const currentLow = useRef(LIMITS.MIN_LIMIT);
+  const currentHigh = useRef(LIMITS.MAX_LIMIT);
+
+  const guessNextNumberHandler = (direction) => {
+    if ((direction === USER_ACTIONS.LOWER && guessedNumber < selectedNumber) || (direction === USER_ACTIONS.GREATER && guessedNumber > selectedNumber)) {
+      Alert.alert('Don\'t lie, human!', 'The guess must be greater.', [{ text: 'Sorry', style: 'default', onPress: () => {} }]);
+      return;
     }
-  };
 
-  const greaterEstimationHandler = () => {
-    if (numbers.guessedNumber > LIMITS.MIN_LIMIT) {
-      setNumbers((prevState) => ({
-        ...prevState,
-        lowerLimit: prevState.guessedNumber,
-        guessedNumber: generateRandomNumber(prevState.guessedNumber, prevState.upperLimit),
-        counter: prevState.counter + 1
-      }));
+    // Note: the component doesn't get re-rendered when we change refs.
+    if (direction === USER_ACTIONS.LOWER) {
+      currentHigh.current = guessedNumber;
     } else {
-      setNumbers((prevState) => ({
-        ...prevState,
-        guessedNumber: generateRandomNumber(prevState.lowerLimit, prevState.upperLimit),
-        counter: prevState.counter + 1
-      }));
+      currentLow.current = guessedNumber;
     }
+
+    const nextNumber = generateRandomNumber(currentLow.current, currentHigh.current, guessedNumber);
+    const nextCounter = counter + 1;
+    const isGameFinished = nextNumber === selectedNumber || nextCounter === 5;
+    setCounter(nextCounter);
+    setGameFinished(isGameFinished);
+    setGuessedNumber(nextNumber);
   };
 
-  const numberMatchedHandler = () => {
-    Alert.alert('Game finished!', 'Your cell phone is more intelligent than you :)', [{ text: 'haha thanks!', style: 'default', onPress: () => {} }]);
+  const renderGameFinishedText = () => {
+    const message = guessedNumber === selectedNumber && counter < 5
+      ? 'I\'m more intelligent than you, human!'
+      : 'You won, fucking human.';
+
+    return <Text>{message}</Text>;
   };
+
+  const renderButtonContainer = () => (
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.greaterLowerButton} onPress={guessNextNumberHandler.bind(this, USER_ACTIONS.LOWER)}>
+        <AntDesign name="minus" size={20} color="white" />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.greaterLowerButton} onPress={guessNextNumberHandler.bind(this, USER_ACTIONS.GREATER)}>
+        <AntDesign name="plus" size={20} color="white" />
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
       <Card style={styles.cardContainer}>
-        <Text style={styles.guessedNumberText}>{numbers.counter >= 5 ? 'You won, fucking human.' : numbers.guessedNumber}</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.greaterLowerButton} onPress={lowerEstimationHandler}>
-            <AntDesign name="minus" size={20} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.greaterLowerButton} onPress={greaterEstimationHandler}>
-            <AntDesign name="plus" size={20} color="white" />
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.numberMatchedButton} onPress={numberMatchedHandler}>
-          <Text style={styles.numberMatchedText}>This is the number!</Text>
-        </TouchableOpacity>
+        <Text style={styles.guessedNumberText}>{guessedNumber}</Text>
+        {gameFinished && renderGameFinishedText()}
+        {!gameFinished && renderButtonContainer()}
       </Card>
     </View>
   );
@@ -98,7 +107,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     width: '100%'
   },
   guessedNumberText: {
@@ -111,6 +120,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: colors.primary,
     padding: 10,
+    margin: 10,
     borderRadius: 20
   },
   numberMatchedButton: {
@@ -119,12 +129,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 20
-  },
-  numberMatchedText: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-    fontSize: 15
   }
 });
 
