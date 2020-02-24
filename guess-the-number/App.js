@@ -7,6 +7,7 @@ import * as Font from 'expo-font';
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
 import GameFinishedScreen from './screens/GameFinishedScreen';
+import colors from './constants/colors';
 
 const RootStack = createStackNavigator();
 const MainStack = createStackNavigator();
@@ -38,12 +39,24 @@ export default function App() {
       <MainStack.Screen
         name="StartGame"
         component={StartGameScreen}
-        options={{ title: 'Start game' }}
+        options={{
+          title: 'Start game',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary
+          }
+        }}
       />
       <MainStack.Screen
         name="Game"
         component={GameScreen}
-        options={{ title: 'Game' }}
+        options={{
+          title: 'Game',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary
+          }
+        }}
       />
     </MainStack.Navigator>
   );
@@ -54,12 +67,24 @@ export default function App() {
         <RootStack.Screen
           name="GuessTheNumber"
           component={MainStackScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: colors.primary
+            }
+          }}
         />
         <RootStack.Screen
           name="GameFinished"
           component={GameFinishedScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: colors.primary
+            }
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
