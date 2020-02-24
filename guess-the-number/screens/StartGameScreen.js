@@ -41,7 +41,7 @@ const StartGameScreen = ({ navigation }) => {
 
   const renderConfirmedNumberOutput = () => (
     <Card style={styles.chosenNumberContainer}>
-      <Text>You selected</Text>
+      <Text style={styles.description}>You selected</Text>
       <Text style={styles.selectedNumberText}>{selectedNumber}</Text>
       <TouchableOpacity
         style={styles.primaryButton}
@@ -69,7 +69,6 @@ const StartGameScreen = ({ navigation }) => {
           />
           <View style={styles.buttonsContainer}>
             <TouchableOpacity
-              title="Reset"
               style={styles.accentButton}
               onPress={resetNumberHandler}
             >
@@ -107,7 +106,11 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical: 10,
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'montserrat'
+  },
+  description: {
+    fontFamily: 'montserrat'
   },
   primaryButton: {
     alignItems: 'center',
