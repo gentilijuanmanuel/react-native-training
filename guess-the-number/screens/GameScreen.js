@@ -32,8 +32,7 @@ const generateRandomNumber = (currentLowerLimit, currentUpperLimit, excludedNumb
   return randomNumber;
 };
 
-const GameScreen = (props) => {
-  const { route } = props;
+const GameScreen = ({ navigation, route }) => {
   const { selectedNumber } = route.params;
 
   const [guessedNumber, setGuessedNumber] = useState(generateRandomNumber(LIMITS.MIN_LIMIT, LIMITS.MAX_LIMIT, selectedNumber));
@@ -42,6 +41,14 @@ const GameScreen = (props) => {
 
   const currentLow = useRef(LIMITS.MIN_LIMIT);
   const currentHigh = useRef(LIMITS.MAX_LIMIT);
+
+  if (gameFinished) {
+    navigation.navigate('GameFinished', {
+      computerWon: guessedNumber === selectedNumber,
+      counter,
+      selectedNumber
+    });
+  }
 
   const guessNextNumberHandler = (direction) => {
     if ((direction === USER_ACTIONS.LOWER && guessedNumber < selectedNumber) || (direction === USER_ACTIONS.GREATER && guessedNumber > selectedNumber)) {
@@ -64,31 +71,18 @@ const GameScreen = (props) => {
     setGuessedNumber(nextNumber);
   };
 
-  const renderGameFinishedText = () => {
-    const message = guessedNumber === selectedNumber && counter < 5
-      ? 'I\'m more intelligent than you, human!'
-      : 'You won, fucking human.';
-
-    return <Text>{message}</Text>;
-  };
-
-  const renderButtonContainer = () => (
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.greaterLowerButton} onPress={guessNextNumberHandler.bind(this, USER_ACTIONS.LOWER)}>
-        <AntDesign name="minus" size={20} color="white" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.greaterLowerButton} onPress={guessNextNumberHandler.bind(this, USER_ACTIONS.GREATER)}>
-        <AntDesign name="plus" size={20} color="white" />
-      </TouchableOpacity>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
       <Card style={styles.cardContainer}>
         <Text style={styles.guessedNumberText}>{guessedNumber}</Text>
-        {gameFinished && renderGameFinishedText()}
-        {!gameFinished && renderButtonContainer()}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.greaterLowerButton} onPress={guessNextNumberHandler.bind(this, USER_ACTIONS.LOWER)}>
+            <AntDesign name="minus" size={20} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.greaterLowerButton} onPress={guessNextNumberHandler.bind(this, USER_ACTIONS.GREATER)}>
+            <AntDesign name="plus" size={20} color="white" />
+          </TouchableOpacity>
+        </View>
       </Card>
     </View>
   );
