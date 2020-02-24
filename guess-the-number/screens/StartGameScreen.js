@@ -57,7 +57,7 @@ const StartGameScreen = ({ navigation }) => {
       <View style={styles.screenContainer}>
         <Text style={styles.title}>Start a new game!</Text>
         <Card style={styles.inputContainer}>
-          <Text style={styles.primaryButtonDescription}>Choose a number</Text>
+          <Text style={styles.description}>Choose a number</Text>
           <Input
             style={styles.input}
             keyboardType="number-pad"
