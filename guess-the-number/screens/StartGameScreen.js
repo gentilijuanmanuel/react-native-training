@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard, // Note: this is not a component, it's an API to interact with the native keyboard
   Alert // Note: this is not a component, it's an API to interact with the native keyboard
@@ -43,11 +43,12 @@ const StartGameScreen = ({ navigation }) => {
     <Card style={styles.chosenNumberContainer}>
       <Text>You selected</Text>
       <Text style={styles.selectedNumberText}>{selectedNumber}</Text>
-      <Button
-        title="Let's go!"
-        color={colors.primary}
+      <TouchableOpacity
+        style={styles.primaryButton}
         onPress={() => navigation.navigate('Game', { selectedNumber })}
-      />
+      >
+        <Text style={styles.primaryButtonDescription}>Let's go!</Text>
+      </TouchableOpacity>
     </Card>
   );
 
@@ -56,7 +57,7 @@ const StartGameScreen = ({ navigation }) => {
       <View style={styles.screenContainer}>
         <Text style={styles.title}>Start a new game!</Text>
         <Card style={styles.inputContainer}>
-          <Text>Choose a number</Text>
+          <Text style={styles.primaryButtonDescription}>Choose a number</Text>
           <Input
             style={styles.input}
             keyboardType="number-pad"
@@ -67,18 +68,19 @@ const StartGameScreen = ({ navigation }) => {
             value={enteredValue}
           />
           <View style={styles.buttonsContainer}>
-            <Button
+            <TouchableOpacity
               title="Reset"
-              styles={styles.button}
-              color={colors.accent}
+              style={styles.accentButton}
               onPress={resetNumberHandler}
-            />
-            <Button
-              title="Start"
-              styles={styles.button}
-              color={colors.primary}
+            >
+              <Text style={styles.accentButtonDescription}>Reset</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.primaryButton}
               onPress={confirmNumberHandler}
-            />
+            >
+              <Text style={styles.primaryButtonDescription}>Start</Text>
+            </TouchableOpacity>
           </View>
         </Card>
         {confirmed && renderConfirmedNumberOutput()}
@@ -107,8 +109,30 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 20
   },
-  button: {
-    width: 100
+  primaryButton: {
+    alignItems: 'center',
+    width: 100,
+    height: 40,
+    backgroundColor: colors.primary,
+    padding: 10,
+    margin: 20,
+    borderRadius: 20
+  },
+  accentButton: {
+    alignItems: 'center',
+    width: 100,
+    height: 40,
+    padding: 10,
+    margin: 20,
+    borderRadius: 20
+  },
+  primaryButtonDescription: {
+    color: 'white',
+    fontFamily: 'montserrat'
+  },
+  accentButtonDescription: {
+    color: colors.primary,
+    fontFamily: 'montserrat'
   },
   input: {
     width: 50,

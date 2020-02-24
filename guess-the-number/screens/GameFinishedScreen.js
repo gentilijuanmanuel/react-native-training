@@ -43,11 +43,13 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 34,
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    fontFamily: 'montserrat'
   },
   description: {
     textAlign: 'center',
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: 'montserrat'
   },
   closeButton: {
     alignItems: 'center',
@@ -59,7 +61,8 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   closeButtonText: {
-    color: 'white'
+    color: 'white',
+    fontFamily: 'montserrat'
   }
 });
 
