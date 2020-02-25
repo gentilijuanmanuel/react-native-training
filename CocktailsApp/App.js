@@ -16,12 +16,7 @@ const App = () => (
       <RootStack.Screen
         name="WelcomeScreen"
         component={WelcomeScreen}
-        options={{
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: colors.primary,
-          },
-        }}
+        options={{ headerShown: false }}
       />
       <RootStack.Screen
         name="CocktailsScreen"
