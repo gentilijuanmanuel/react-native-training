@@ -10,17 +10,42 @@ import GameScreen from './screens/GameScreen';
 import GameFinishedScreen from './screens/GameFinishedScreen';
 import colors from './constants/colors';
 
+const fetchFonts = () => Font.loadAsync({
+  // eslint-disable-next-line quote-props
+  'montserrat': require('./assets/Fonts/Montserrat-Regular.ttf'),
+  // eslint-disable-next-line global-require
+  'montserrat-bold': require('./assets/Fonts/Montserrat-Bold.ttf')
+});
+
 const RootStack = createStackNavigator();
 const MainStack = createStackNavigator();
 
-const fetchFonts = () => {
-  Font.loadAsync({
-    // eslint-disable-next-line quote-props
-    'montserrat': require('./assets/Fonts/Montserrat-Regular.ttf'),
-    // eslint-disable-next-line global-require
-    'montserrat-bold': require('./assets/Fonts/Montserrat-Bold.ttf')
-  });
-};
+const MainStackScreen = () => (
+  <MainStack.Navigator>
+    <MainStack.Screen
+      name="StartGame"
+      component={StartGameScreen}
+      options={{
+        title: 'Start game',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: colors.primary
+        }
+      }}
+    />
+    <MainStack.Screen
+      name="Game"
+      component={GameScreen}
+      options={{
+        title: 'Game',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: colors.primary
+        }
+      }}
+    />
+  </MainStack.Navigator>
+);
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -35,57 +60,18 @@ export default function App() {
     );
   }
 
-  const MainStackScreen = () => (
-    <MainStack.Navigator>
-      <MainStack.Screen
-        name="StartGame"
-        component={StartGameScreen}
-        options={{
-          title: 'Start game',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: colors.primary
-          }
-        }}
-      />
-      <MainStack.Screen
-        name="Game"
-        component={GameScreen}
-        options={{
-          title: 'Game',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: colors.primary
-          }
-        }}
-      />
-    </MainStack.Navigator>
-  );
-
   return (
     <NavigationContainer>
       <RootStack.Navigator mode="modal">
         <RootStack.Screen
           name="GuessTheNumber"
           component={MainStackScreen}
-          options={{
-            headerShown: false,
-            headerTintColor: 'white',
-            headerStyle: {
-              backgroundColor: colors.primary
-            }
-          }}
+          options={{ headerShown: false }}
         />
         <RootStack.Screen
           name="GameFinished"
           component={GameFinishedScreen}
-          options={{
-            headerShown: false,
-            headerTintColor: 'white',
-            headerStyle: {
-              backgroundColor: colors.primary
-            }
-          }}
+          options={{ headerShown: false }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
