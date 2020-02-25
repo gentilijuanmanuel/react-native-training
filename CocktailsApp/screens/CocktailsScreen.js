@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
-const CocktailsScreen = props => {
+const CocktailsScreen = (props) => {
   const {} = props;
   return (
     <View>
