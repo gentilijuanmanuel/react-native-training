@@ -73,11 +73,11 @@ const CocktailsScreen = (props) => {
       <SearchBar
         placeholder="Search drinks..."
         onChangeText={updateSearch}
-        lightTheme="true"
+        lightTheme
         containerStyle={styles.searchBarContainerStyle}
         showLoading={loading}
         onCancel={() => updateSearch('')}
-        round="true"
+        round
         value={drinkEnteredValue}
       />
       {display}
