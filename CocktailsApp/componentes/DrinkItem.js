@@ -4,14 +4,12 @@ import {
   View,
   Text,
   Image
-  // TouchableOpacity
 } from 'react-native';
 
 const DrinkItem = (props) => {
   const { drink } = props;
 
   return (
-  // <TouchableOpacity activeOpacity={0.8} onPress={() => onDelete(drink.item.idDrink)}>
     <View key={drink.item.idDrink} style={styles.drinkItemContainer}>
       <Image
         style={styles.drinkImage}
@@ -19,7 +17,6 @@ const DrinkItem = (props) => {
       />
       <Text style={styles.drinkTitle}>{drink.item.strDrink}</Text>
     </View>
-  // </TouchableOpacity>
   );
 };
 
@@ -42,5 +39,9 @@ const styles = StyleSheet.create({
     margin: 15
   }
 });
+
+DrinkItem.propTypes = {
+  drink: PropTypes.object.isRequired
+};
 
 export default DrinkItem;

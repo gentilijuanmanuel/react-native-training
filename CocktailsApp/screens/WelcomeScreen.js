@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
+import PropTypes from 'prop-types';
 
 import colors from '../constants/colors';
 
@@ -70,5 +71,9 @@ const styles = StyleSheet.create({
     margin: 5
   }
 });
+
+WelcomeScreen.propTypes = {
+  navigation: PropTypes.object.isRequired
+};
 
 export default WelcomeScreen;
