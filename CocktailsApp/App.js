@@ -22,9 +22,10 @@ const App = () => (
         name="CocktailsScreen"
         component={CocktailsScreen}
         options={{
+          title: 'Cocktails Finder',
           headerTintColor: 'white',
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: colors.primary
           },
         }}
       />
