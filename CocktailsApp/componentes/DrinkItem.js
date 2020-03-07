@@ -5,6 +5,7 @@ import {
   Text,
   Image
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 const DrinkItem = (props) => {
   const { drink } = props;
