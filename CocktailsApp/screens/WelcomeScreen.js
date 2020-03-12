@@ -1,15 +1,11 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 
 import colors from '../constants/colors';
+import AppBrand from '../componentes/AppBrand';
+import SearchButton from '../componentes/SearchButton';
 
 const WelcomeScreen = ({ navigation }) => {
   const searchCocktailsHandler = () => navigation.navigate('CocktailsScreen');
@@ -22,17 +18,8 @@ const WelcomeScreen = ({ navigation }) => {
         colors.accent
       ]}
     >
-      <View style={styles.controlsContainer}>
-        <Icon name="glass" size={70} color="#FFFFFF" />
-        <View style={styles.textContainer}>
-          <Text style={styles.cocktailText}>Cocktail</Text>
-          <Text style={styles.finderText}>Finder</Text>
-        </View>
-        <TouchableOpacity style={styles.searchCocktailsButton} onPress={searchCocktailsHandler}>
-          <Icon name="search" size={25} color={colors.primary} />
-          <Text style={styles.findCocktailText}>Search your favorite cocktail</Text>
-        </TouchableOpacity>
-      </View>
+      <AppBrand />
+      <SearchButton searchCocktailsHandler={searchCocktailsHandler} />
     </LinearGradient>
   );
 };
@@ -42,36 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  controlsContainer: {
-    alignItems: 'center'
-  },
-  textContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  cocktailText: {
-    fontSize: 40,
-    color: 'white',
-    fontFamily: 'Lato-Bold'
-  },
-  finderText: {
-    fontSize: 40,
-    color: 'white',
-    fontFamily: 'Lato-Regular'
-  },
-  searchCocktailsButton: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 10
-  },
-  findCocktailText: {
-    color: 'grey',
-    alignSelf: 'center',
-    margin: 5,
-    fontFamily: 'Lato-Regular'
   }
 });
 

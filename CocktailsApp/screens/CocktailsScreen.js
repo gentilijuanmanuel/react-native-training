@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import {
-  ActivityIndicator,
-  StyleSheet,
-  FlatList
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SearchBar } from 'react-native-elements';
-import DrinkItem from '../componentes/DrinkItem';
+
+import DrinksList from '../componentes/DrinksList';
 
 import BASE_URL from '../api/urls';
 import colors from '../constants/colors';
@@ -43,26 +40,6 @@ const CocktailsScreen = (props) => {
     getDrinksFromApiAsync(drinkEnteredValue);
   }
 
-  let display = null;
-  if (loading) {
-    display = (
-      <ActivityIndicator
-        style={styles.activityIndicatorStyle}
-        size="large"
-        color={colors.white}
-      />
-    );
-  } else {
-    display = (
-      <FlatList
-        style={styles.drinksFlatView}
-        data={drinksResponse.drinks}
-        keyExtractor={(drink) => drink.idDrink}
-        renderItem={(drink) => <DrinkItem drink={drink} />}
-      />
-    );
-  }
-
   return (
     <LinearGradient
       style={styles.screenContainer}
@@ -83,7 +60,7 @@ const CocktailsScreen = (props) => {
         round
         value={drinkEnteredValue}
       />
-      {display}
+      <DrinksList isLoading={loading} response={drinksResponse} />
     </LinearGradient>
   );
 };
@@ -93,9 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch'
   },
-  drinksFlatView: {
-    flex: 1
-  },
   searchBarContainerStyle: {
     backgroundColor: colors.primary,
     borderBottomColor: 'transparent',
@@ -103,9 +77,6 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     fontFamily: 'Lato-Regular'
-  },
-  activityIndicatorStyle: {
-    margin: 20
   }
 });
 
