@@ -47,16 +47,18 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   cocktailText: {
     fontSize: 40,
-    fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
+    fontFamily: 'Lato-Bold'
   },
   finderText: {
     fontSize: 40,
-    color: 'white'
+    color: 'white',
+    fontFamily: 'Lato-Regular'
   },
   searchCocktailsButton: {
     flexDirection: 'row',
@@ -68,7 +70,8 @@ const styles = StyleSheet.create({
   findCocktailText: {
     color: 'grey',
     alignSelf: 'center',
-    margin: 5
+    margin: 5,
+    fontFamily: 'Lato-Regular'
   }
 });
 

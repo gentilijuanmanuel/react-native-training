@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
     borderRadius: 100
   },
   drinkTitle: {
-    fontSize: 25,
-    margin: 15
+    fontSize: 20,
+    margin: 15,
+    fontFamily: 'Lato-Regular'
   }
 });
 

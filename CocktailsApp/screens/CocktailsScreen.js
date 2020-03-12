@@ -77,6 +77,7 @@ const CocktailsScreen = (props) => {
         lightTheme
         style={styles.searchBarStyle}
         containerStyle={styles.searchBarContainerStyle}
+        inputStyle={styles.inputStyle}
         showLoading={loading}
         onCancel={() => updateSearch('')}
         round
@@ -99,6 +100,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent'
+  },
+  inputStyle: {
+    fontFamily: 'Lato-Regular'
   },
   activityIndicatorStyle: {
     margin: 20
