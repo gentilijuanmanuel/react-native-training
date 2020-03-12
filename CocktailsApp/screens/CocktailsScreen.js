@@ -57,6 +57,7 @@ const CocktailsScreen = (props) => {
       <FlatList
         style={styles.drinksFlatView}
         data={drinksResponse.drinks}
+        keyExtractor={(drink) => drink.idDrink}
         renderItem={(drink) => <DrinkItem drink={drink} />}
       />
     );
@@ -74,6 +75,7 @@ const CocktailsScreen = (props) => {
         placeholder="Search drinks..."
         onChangeText={updateSearch}
         lightTheme
+        style={styles.searchBarStyle}
         containerStyle={styles.searchBarContainerStyle}
         showLoading={loading}
         onCancel={() => updateSearch('')}
@@ -91,11 +93,12 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
   drinksFlatView: {
-    flex: 1,
-    margin: 20
+    flex: 1
   },
   searchBarContainerStyle: {
-    backgroundColor: colors.primary
+    backgroundColor: colors.primary,
+    borderBottomColor: 'transparent',
+    borderTopColor: 'transparent'
   },
   activityIndicatorStyle: {
     margin: 20

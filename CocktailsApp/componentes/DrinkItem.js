@@ -16,7 +16,13 @@ const DrinkItem = (props) => {
         style={styles.drinkImage}
         source={{ uri: drink.item.strDrinkThumb }}
       />
-      <Text style={styles.drinkTitle}>{drink.item.strDrink}</Text>
+      <Text
+        style={styles.drinkTitle}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
+        {drink.item.strDrink}
+      </Text>
     </View>
   );
 };
@@ -25,6 +31,9 @@ const styles = StyleSheet.create({
   drinkItemContainer: {
     flexDirection: 'row',
     padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
     marginBottom: 5,
     backgroundColor: 'white',
     borderRadius: 10,
