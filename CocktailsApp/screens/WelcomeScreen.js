@@ -4,8 +4,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 
 import colors from '../constants/colors';
-import AppBrand from '../componentes/AppBrand';
-import SearchButton from '../componentes/SearchButton';
+import AppBrand from '../components/AppBrand';
+import SearchButton from '../components/SearchButton';
 
 const WelcomeScreen = ({ navigation }) => {
   const searchCocktailsHandler = () => navigation.navigate('CocktailsScreen');
