@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SearchBar } from 'react-native-elements';
 
-import DrinksList from '../componentes/DrinksList';
+import DrinksList from '../components/DrinksList';
 
 import BASE_URL from '../api/urls';
 import colors from '../constants/colors';
