@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SearchBar } from 'react-native-elements';
@@ -13,32 +13,23 @@ const CocktailsScreen = (props) => {
   const [drinksResponse, setDrinksResponse] = useState(null);
   const [drinkEnteredValue, setDrinkEnteredValue] = useState('');
 
-  const getDrinksFromApiAsync = (search) => fetch(BASE_URL + search)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      setDrinksResponse(responseJson);
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.error(error);
-      setLoading(false);
-    });
-
-  const updateSearch = (searchValue) => {
-    setDrinkEnteredValue(searchValue);
-    if (searchValue.length > 3 || searchValue === '') {
+  useEffect(() => {
+    if (drinkEnteredValue.length > 3 || drinkEnteredValue === '') {
       setLoading(true);
+      fetch(BASE_URL + drinkEnteredValue)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setDrinksResponse(responseJson);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          setLoading(false);
+        });
     }
-    setTimeout(() => {
-      if (searchValue.length > 3 || searchValue === '') {
-        getDrinksFromApiAsync(searchValue);
-      }
-    }, 1000);
-  };
+  }, [drinkEnteredValue]);
 
-  if (loading && drinkEnteredValue === '') {
-    getDrinksFromApiAsync(drinkEnteredValue);
-  }
+  const updateSearch = (searchValue) => setDrinkEnteredValue(searchValue);
 
   return (
     <LinearGradient
