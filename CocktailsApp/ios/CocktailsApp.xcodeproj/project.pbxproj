@@ -20,8 +20,8 @@
 		5365FBFC1F7CC8D75896BD5A /* libPods-CocktailsApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 701D727BB4266BCBEF800DE5 /* libPods-CocktailsApp.a */; };
 		611471DB01E0E9585A29BFFA /* libPods-CocktailsApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FCC5EAFDEE08691DB4BC3C5 /* libPods-CocktailsApp-tvOS.a */; };
 		CCB8F8AEAAC29603EFCB2236 /* libPods-CocktailsAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF08E27C03DE331C5BB65971 /* libPods-CocktailsAppTests.a */; };
-		E04167E7241AB8EE002E5694 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E04167E5241AB8EE002E5694 /* Lato-Bold.ttf */; };
-		E04167E8241AB8EE002E5694 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E04167E6241AB8EE002E5694 /* Lato-Regular.ttf */; };
+		F53A6CBE2420F57B007A3B51 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F53A6CBD2420F57B007A3B51 /* Lato-Bold.ttf */; };
+		F53A6CC02420F583007A3B51 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F53A6CBF2420F583007A3B51 /* Lato-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,11 +83,11 @@
 		D00009C8C3A14AC3BA295F60 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		D8375CDE4A67420180131B36 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		DF08E27C03DE331C5BB65971 /* libPods-CocktailsAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocktailsAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E04167E5241AB8EE002E5694 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../../../../../../../Desktop/Lato/Lato-Bold.ttf"; sourceTree = "<group>"; };
-		E04167E6241AB8EE002E5694 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../../../../Desktop/Lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		E5E1E7E5F2CE2F8F30DF4F4E /* Pods-CocktailsApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocktailsApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-CocktailsApp-tvOS/Pods-CocktailsApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F53A6CBD2420F57B007A3B51 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		F53A6CBF2420F583007A3B51 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		FC548CACC7194451B7A9D0BB /* Lato-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Bold.ttf"; path = "../assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,8 +249,8 @@
 		E04167E4241AB8B2002E5694 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
-				E04167E5241AB8EE002E5694 /* Lato-Bold.ttf */,
-				E04167E6241AB8EE002E5694 /* Lato-Regular.ttf */,
+				F53A6CBD2420F57B007A3B51 /* Lato-Bold.ttf */,
+				F53A6CBF2420F583007A3B51 /* Lato-Regular.ttf */,
 			);
 			path = fonts;
 			sourceTree = "<group>";
@@ -400,9 +400,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				E04167E7241AB8EE002E5694 /* Lato-Bold.ttf in Resources */,
+				F53A6CBE2420F57B007A3B51 /* Lato-Bold.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				E04167E8241AB8EE002E5694 /* Lato-Regular.ttf in Resources */,
+				F53A6CC02420F583007A3B51 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
